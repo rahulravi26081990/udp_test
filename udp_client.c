@@ -26,8 +26,7 @@ int main(void)
     char buf[BUFLEN];
     char message[BUFLEN];
  
-    if ( (s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
-    {
+    if ( (s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
         die("socket");
     }
  
@@ -35,21 +34,18 @@ int main(void)
     si_other.sin_family = AF_INET;
     si_other.sin_port = htons(PORT);
      
-    if (inet_aton(SERVER , &si_other.sin_addr) == 0) 
-    {
+    if (inet_aton(SERVER , &si_other.sin_addr) == 0) {
         fprintf(stderr, "inet_aton() failed\n");
         exit(1);
     }
  
-    while(1)
-    {
+    while(1){
 		message[0] = (unsigned char )CLIENT1_HEADER;
         printf("Enter message : ");
         scanf("%[^\n]s", &message[1]);
          
         //send the message
-        if (sendto(s, message, strlen(message) , 0 , (struct sockaddr *) &si_other, slen)==-1)
-        {
+        if (sendto(s, message, strlen(message) , 0 , (struct sockaddr *) &si_other, slen)==-1){
             die("sendto()");
         }
          
@@ -57,8 +53,7 @@ int main(void)
         //clear the buffer by filling null, it might have previously received data
         memset(buf,'\0', BUFLEN);
         //try to receive some data, this is a blocking call
-        if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen) == -1)
-        {
+        if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen) == -1){
             die("recvfrom()");
         }
          
