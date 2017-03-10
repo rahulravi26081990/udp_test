@@ -60,8 +60,7 @@ int main(void)
     char buf[BUFLEN];
      
     //create a UDP socket
-    if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
-    {
+    if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)  {
         die("socket");
     }
      
